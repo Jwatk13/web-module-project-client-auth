@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const AddFriends = () => {
 
+    const { push } = useHistory();
+    
     const [ form, setForm ] = useState({
         name: '',
         age: '',
@@ -22,14 +25,15 @@ const AddFriends = () => {
             headers: { authorization: localStorage.getItem('token') }
         })
             .then(res => {
-                console.log(res, 'this is my add friend log')
+                // console.log(res, 'this is my add friend log')
+                push('/friends');
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    console.log(form)
+    // console.log(form)
 
     return ( 
         <div>
