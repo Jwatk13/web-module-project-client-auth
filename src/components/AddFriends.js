@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+import axiosWithAuth from '../utils/axiosWithAuth';
+
 const AddFriends = () => {
 
     const { push } = useHistory();
-    
+
     const [ form, setForm ] = useState({
         name: '',
         age: '',
@@ -21,7 +23,7 @@ const AddFriends = () => {
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        axios.post('http://localhost:9000/api/friends',form, {
+        axiosWithAuth().post('/friends',form, {
             headers: { authorization: localStorage.getItem('token') }
         })
             .then(res => {
